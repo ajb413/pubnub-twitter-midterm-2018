@@ -350,16 +350,15 @@ export default (request) => {
                         
                         return xhr.fetch('https://' + sentimentOpts.host, sentimentHttp_options)
                             .then(function (response) {
-                                var sentiment = JSON.parse(response.body)
+                                var sentiment = JSON.parse(response.body.toLowerCase())
 
-                                if (sentiment['__type'] === 'SerializationException') {
+                                if (sentiment['__type'] === 'serializationexception') {
                                     return request.abort();
                                 }
 
-                                console.log('responseeee',sentiment);
-                                
-                                const type = sentiment.Sentiment.toLowerCase();
-                                const score = sentiment.SentimentScore.mixed;
+                                const type = sentiment.sentiment;
+                                console.log(sentiment);
+                                const score = sentiment.sentimentscore['positive'] - sentiment.sentimentscore['negative']
                                 const cur = sessionSentiment[type] || { count: 0, avg: 0 };
                                 const curSum = cur.avg * cur.count;
                                 const newtotal = ++(cur.count);
