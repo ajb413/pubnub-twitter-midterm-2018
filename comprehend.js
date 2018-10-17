@@ -357,7 +357,6 @@ export default (request) => {
                                 }
 
                                 const type = sentiment.sentiment;
-                                console.log(sentiment);
                                 const score = sentiment.sentimentscore['positive'] - sentiment.sentimentscore['negative']
                                 const cur = sessionSentiment[type] || { count: 0, avg: 0 };
                                 const curSum = cur.avg * cur.count;
