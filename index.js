@@ -12,8 +12,8 @@ var pubnubTwitter = new PubNub({
 
 // Configure personal subscribe and publish key
 var pubnubPersonal = new PubNub({
-	publishKey: "pub-c-5706ec68-cb71-4943-9950-5b32f6f2bc60",
-	subscribeKey: "sub-c-3ee47272-c804-11e8-80d1-72aadab1d7f1",
+	publishKey: "_your_publish_key_here_",
+	subscribeKey: "_your_subscribe_key_here_",
 })
 
 // Initiate session_id for the Watson block
