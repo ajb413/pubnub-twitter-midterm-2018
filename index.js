@@ -1,9 +1,9 @@
 var PubNub = require('pubnub')
  
-// Configure Google Maps API key
-// var googleMapsClient = require('@google/maps').createClient({
-//   key: ''
-// });
+Configure Google Maps API key
+var googleMapsClient = require('@google/maps').createClient({
+  key: '_your_api_key_here_'
+});
 
 // Configure Twitter subscribe key
 var pubnubTwitter = new PubNub({
@@ -33,31 +33,31 @@ pubnubTwitter.addListener({
 		if (text.match(/(trump|midterms|midterm|#midterm2018|election|senate|republican|democrat|GOP|#votethemout|#bluewave|#redwave|liberal|conservative|#midterms2018|#votefromabroad|#vote|#timetovote|#2020election|#resist|ted cruz|beto)/g) && msg.lang === 'en') {
 			session_Id++;
 
-			// if (msg.place.full_name) {
-			// 	// Get lat/long of tweet location
-			// 	googleMapsClient.geocode({
-			// 		address: msg.place.full_name
-			// 	}, function(err, response) {
-			// 		if (!err) {
-			// 			var data = response.json.results[0].geometry.location;
-			// 			location = [data.lat, data.lng];
-			// 		} else {
-			// 			console.log('ERROR: ', err);
-			// 			location = [];
-			// 		}
+			if (msg.place.full_name) {
+				// Get lat/long of tweet location
+				googleMapsClient.geocode({
+					address: msg.place.full_name
+				}, function(err, response) {
+					if (!err) {
+						var data = response.json.results[0].geometry.location;
+						location = [data.lat, data.lng];
+					} else {
+						console.log('ERROR: ', err);
+						location = [];
+					}
 
-			// 		// Where we publish tweets for sentiment analysis
-			// 		var publishConfig = {
-			// 			channel : "sentiment-analysis",
-			// 			message : {"session_id":session_Id,"text":msg.text,"coord":location}
-			// 		}
-			// 		pubnubPersonal.publish(publishConfig, function(status, response) {
-			// 			if (status.error) {
-			// 				console.log(status, response);
-			// 			}
-			// 		})
-			// 	});
-			// } else {
+					// Where we publish tweets for sentiment analysis
+					var publishConfig = {
+						channel : "sentiment-analysis",
+						message : {"session_id":session_Id,"text":msg.text,"coord":location}
+					}
+					pubnubPersonal.publish(publishConfig, function(status, response) {
+						if (status.error) {
+							console.log(status, response);
+						}
+					})
+				});
+			} else {
 				// Where we publish tweets for sentiment analysis
 				var publishConfig = {
 					channel : "sentiment-analysis",
@@ -68,7 +68,7 @@ pubnubTwitter.addListener({
 						console.log(status, response);
 					}
 				})
-			// }
+			}
 		}
 	}
 

@@ -1,25 +1,4 @@
-// http://docs.initialstateeventsapi.apiary.io/#reference/event-buckets/buckets-json/send-events?console=1
-// Example published message payload
-// {
-//     "events": [
-//         {
-//             "key": "temperature",
-//             "value": 16
-//         }
-//     ],
-//     "bucketKey": "PBUYDWHTRMT4"
-// }
-// With epoch
-// {
-//     "events": [
-//         {
-//             "key": "temperature",
-//             "value": 16,
-//             "epoch": 1419876022.778477
-//         }
-//     ],
-//     "bucketKey": "PBUYDWHTRMT4"
-// }
+// Add your INITIAL_STATE_KEY to the PubNub Functions Vault by clicking MY SECRETS
 
 const vault = require('vault');
 
