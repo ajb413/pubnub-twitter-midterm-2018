@@ -46,8 +46,11 @@ export default (request) => {
           
         const url = "https://groker.initialstate.com/api/events";
 
-        return xhr.fetch(url, http_options).then((x) => {
+        return xhr.fetch(url, http_options).then((initialStateApiResponse) => {
+            console.log(initialStateApiResponse);
             return request.ok();
         });
+    }).catch((err) => {
+        console.error(err);
     });
-}
+};
